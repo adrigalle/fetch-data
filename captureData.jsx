@@ -17,8 +17,7 @@ const Pagination = ({ items, pageSize, onPageChange }) => {
       <ul className="pagination">{list}</ul>
     </nav>
   );
-}; 
-// get number of items if less or =1, then don't need pagination
+}; // get number of items if less or =1, then don't need pagination
 // calculate page size
 //round up, take the amount of items, divide those by the pagesize (10 in this case)
 // create the buttons
@@ -104,7 +103,7 @@ function App() {
   const [currentPage, setCurrentPage] = useState(1);
   const pageSize = 10;
   const [{ data, isLoading, isError }, doFetch] = useDataApi(
-    "https://inshorts.deta.dev/news?category=science",
+    "https://hn.algolia.com/api/v1/search?query=MIT",
     {
       hits: []
     }
@@ -117,12 +116,13 @@ function App() {
     page = paginate(page, currentPage, pageSize);
     console.log(`currentPage: ${currentPage}`);
   }
+
   return (
     <Fragment>
 
       <form
         onSubmit={event => {
-          doFetch("https://inshorts.deta.dev/news?category={category_name}");
+          doFetch(`http://hn.algolia.com/api/v1/search?query=${query}`);
           event.preventDefault();
         }}
       >
@@ -134,14 +134,32 @@ function App() {
         <button type="submit">Search</button>
       </form>
 
+      {/* <nav>
+          <ul>
+            <li>
+              <a href="https://hacker-news.firebaseio.com/v0/topstories.json?print=pretty">Top Stories</a>
+            </li>
+            <li>
+              <a href="https://hacker-news.firebaseio.com/v0/askstories.json?print=pretty">Ask Stories</a>
+            </li>
+            <li>
+              <a href="https://hacker-news.firebaseio.com/v0/showstories.json?print=pretty">Show Stories</a>
+            </li>
+            <li>
+              <a href="https://hacker-news.firebaseio.com/v0/jobstories.json?print=pretty">Job Stories</a>
+            </li>
+          </ul>
+        </nav> */}
+
       {isError && <div>Something went wrong ...</div>}
 
       {isLoading ? (
         <div>Loading ...</div>
       ) : (
-        <ul>
+
+        <ul className="list-group">
           {page.map(item => (
-            <li key={item.objectID}>
+            <li className="list-group-item" key={item.objectID}>
               <a href={item.url}>{item.title}</a>
             </li>
           ))}
