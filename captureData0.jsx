@@ -103,7 +103,7 @@ function App() {
   const [currentPage, setCurrentPage] = useState(1);
   const pageSize = 10;
   const [{ data, isLoading, isError }, doFetch] = useDataApi(
-    "https://hn.algolia.com/api/v1/search?query=MIT",
+    "https://inshorts.deta.dev/news?category=science",
     {
       hits: []
     }
@@ -122,7 +122,7 @@ function App() {
 
       <form
         onSubmit={event => {
-          doFetch(`http://hn.algolia.com/api/v1/search?query=${query}`);
+          doFetch(`https://inshorts.deta.dev/news?category=${category_name}`);
           event.preventDefault();
         }}
       >
@@ -135,7 +135,7 @@ function App() {
         <button className="submit-button" type="submit">Search</button>
       </form>
 
-      <nav>
+      {/* <nav>
         <ul className="top-nav">
           <li className="top-nav-item">
             <a href="https://hacker-news.firebaseio.com/v0/topstories.json?print=pretty">Top Stories</a>
@@ -150,7 +150,7 @@ function App() {
             <a href="https://hacker-news.firebaseio.com/v0/jobstories.json?print=pretty">Job Stories</a>
           </li>
         </ul>
-      </nav>
+      </nav> */}
 
       {isError && <div>Something went wrong ...</div>}
 
