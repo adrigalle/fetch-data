@@ -103,7 +103,7 @@ function App() {
   const [currentPage, setCurrentPage] = useState(1);
   const pageSize = 10;
   const [{ data, isLoading, isError }, doFetch] = useDataApi(
-    "https://openlibrary.org/search?q=MIT&mode=everything",
+    "https://api.fbi.gov/wanted/v1/list",
     {
       hits: []
     }
@@ -121,7 +121,7 @@ function App() {
 
       <form
         onSubmit={event => {
-          doFetch("https://openlibrary.org/search?q=${query}&mode=everything");
+          doFetch("https://api.fbi.gov/wanted/v1/list");
           event.preventDefault();
         }}
       >
