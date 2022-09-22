@@ -17,7 +17,8 @@ const Pagination = ({ items, pageSize, onPageChange }) => {
       <ul className="pagination">{list}</ul>
     </nav>
   );
-}; // get number of items if less or =1, then don't need pagination
+}; 
+// get number of items if less or =1, then don't need pagination
 // calculate page size
 //round up, take the amount of items, divide those by the pagesize (10 in this case)
 // create the buttons
@@ -103,7 +104,7 @@ function App() {
   const [currentPage, setCurrentPage] = useState(1);
   const pageSize = 10;
   const [{ data, isLoading, isError }, doFetch] = useDataApi(
-    "https://api.fbi.gov/wanted/v1/list",
+    "https://inshorts.deta.dev/news?category=science",
     {
       hits: []
     }
@@ -121,7 +122,7 @@ function App() {
 
       <form
         onSubmit={event => {
-          doFetch("https://api.fbi.gov/wanted/v1/list");
+          doFetch("https://inshorts.deta.dev/news?category={category_name}");
           event.preventDefault();
         }}
       >
